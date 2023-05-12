@@ -1,9 +1,9 @@
 
 const express = require('express')
-const axios = require('axios')
 const parser = require('body-parser')
 const { post } = require('./src')
 const { authenticate } = require('./middlewares')
+const services = require('./services')
 
 const app = express()
 const port = 3000
@@ -12,7 +12,7 @@ app.use(parser.urlencoded({extended: false}))
 
 app.use(parser.json())
 
-const postHandlers = post({ axios })
+const postHandlers = post(services)
 
 app.post('/',authenticate ,postHandlers.post)
 
